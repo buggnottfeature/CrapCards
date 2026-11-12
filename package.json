@@ -1,0 +1,1 @@
+{"name":"crap-cards","version":"1.0.0","private":true,"description":"Crap Cards: ein lokales Partyspiel für vier Spieler","scripts":{"test":"node tests/game.test.cjs"}}
