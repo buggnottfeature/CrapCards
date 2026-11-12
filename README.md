@@ -17,19 +17,23 @@ Es ist kein Build erforderlich. `.nojekyll` ist enthalten. Alle Pfade sind relat
 
 Zum lokalen Spielen kann `index.html` direkt geöffnet werden. Manche Browser schränken die Speicherung bei lokal geöffneten Dateien ein. Über GitHub Pages wird der Spielstand im lokalen Browser gespeichert. „Neue Partie“ setzt die Punkte zurück und behält die Namen.
 
-## Spielablauf
+## Spielablauf (Version 2)
 
-- Vier Namen direkt in den Punktetafeln eintragen.
-- „Erste Runde aufdecken“ zieht je eine Karte aus fünf getrennten Stapeln.
-- 20 Sekunden Vorbereitung, danach automatischer Start. „Zeit starten“ beginnt früher.
-- Vor Beginn optional „Ja“ beim Kartentausch wählen und genau eine Karte anklicken. Kein Tausch gibt 2 Bonuspunkte. „Nein“ bestätigt den Verzicht. Das Weiterlaufen der Vorbereitung wird dadurch nicht unterbrochen.
-- 30 bis 60 Sekunden sprechen. Nach 30 Sekunden dreht sich die Sanduhr und ein Signal ertönt. Ab dann kann „Vortrag beenden“ gedrückt werden; nach 60 Sekunden endet die Vortragszeit automatisch.
-- Erwähnte Karten anklicken: Sie drehen sich um. Erneut anklicken korrigiert die Auswahl. Jede Karte zählt 1 Punkt. Der Bonus ohne Tausch gilt auch bei null erwähnten Karten.
-- Mit „Punkte bestätigen“ werden die Punkte genau einmal gutgeschrieben. Dann „Nächster Spieler“ wählen.
-- Mindestens 60 Punkte beenden das Spiel sofort nach der bestätigten Wertung. „Beenden“ zeigt vorher eine Bestätigung. Eine laufende, noch unbestätigte Runde zählt beim Beenden nicht.
-- Der Auswertungsscreen zeigt alle vier Teilnehmenden nach Punkten sortiert. Gleichstände teilen denselben Rang.
+- Die erste Reihe für Spieler 1 ist sofort aufgedeckt. Vier Namen direkt in den Punktetafeln eintragen.
+- Optional „Ja“ beim Kartentausch wählen und genau eine Karte anklicken. Kein Tausch gibt 2 Bonuspunkte. „Nein“ bestätigt den Verzicht.
+- Die Vorbereitung zeigt 20 Sekunden an. Der Vortrag startet ausschließlich durch „Bereit?“, auch wenn die Vorbereitungsanzeige bereits auf null steht.
+- Die Sanduhr läuft zweimal 30 Sekunden. Nach 30 Sekunden dreht sie sich und ein Signal ertönt. „Zeit stoppen“ ist jederzeit möglich; nach insgesamt 60 Sekunden stoppt sie automatisch.
+- „Auswertung“ anklicken. Jetzt können erfolgreich erwähnte Karten markiert werden. Sie drehen sich um. Erneut anklicken korrigiert die Auswahl.
+- „Punkte zählen“ schreibt die Wertung genau einmal gut. Jede Karte zählt 1 Punkt, ohne Tausch kommen 2 Bonuspunkte dazu, auch bei null erwähnten Karten.
+- „Nächster Spieler“ deckt die nächste vollständige Reihe auf.
+- Mindestens 60 Punkte beenden das Spiel nach der bestätigten Wertung. „Beenden“ fragt vorher nach. Eine laufende, noch unbestätigte Runde zählt nicht.
+- Gleichstände teilen sich denselben Rang. Eine neue Partie behält die Namen.
 
-Timer arbeiten mit Zeitstempeln und laufen nach einem Wechsel in einen anderen Tab oder einem Neuladen weiter. Die Zeit wird nicht angehalten, wenn die Regeln geöffnet werden. Ton kann ausgeschaltet werden; manche Browser erlauben Signaltöne erst nach einer Interaktion mit der Seite.
+Die gesamte Spielfläche verwendet die verfügbare Fensterhöhe. Das Hauptspielfeld scrollt nicht; Regeln und Abschlussrangliste können bei Bedarf intern scrollen. Das Logo sitzt auf Holz oberhalb der Karten. V2 verwendet einen eigenen Spielstand und beginnt einmalig mit einer frischen Partie. Die Uhr läuft bei Tabwechsel und Neuladen weiter. Browser-Cache-Versionen für CSS und JavaScript sind aktualisiert.
+
+## Version 2 auf GitHub aktualisieren
+
+Den ZIP-Inhalt entpacken und im bestehenden Repository die Dateien ersetzen. Wichtig sind index.html, style.css, app.js und game-core.js. Der assets-Ordner kann unverändert bleiben. Änderungen committen. Nach der erneuten Pages-Veröffentlichung die Spielseite mit Strg+Umschalt+R neu laden.
 
 ## Inhalt
 
@@ -46,3 +50,9 @@ Die 68 aus dem gelieferten Archiv übernommenen Karten hatten keine vollständig
 ## Prüfung
 
 Syntax und Spiellogik wurden geprüft: Tauschlimit, Vorbereitung, 30/60 Sekunden, Bonus, einmalige Wertung, Spielerwechsel, Nachmischen, 60-Punkte-Grenze und Wiederherstellung. Der Browser-Vorschaudienst war während der Erstellung nicht verfügbar. Ein visueller Browser-Test konnte deshalb nicht durchgeführt werden.
+
+## Version 3
+
+Einheitlicher Bildrahmen durch Entfernen der eingebetteten Außenrahmen und Darstellung mit einem gemeinsamen CSS-Rahmen. Alle 81 Ausgangsbilder enthalten sichtbare Motive. Scheitert ein Bildabruf, wird automatisch ohne Tauschverbrauch eine andere Bildkarte gezogen; sind keine ladbaren Bilder mehr verfügbar, erscheint ein lesbares Motiv als Text. „Zeit stoppen“ ist sofort nach „Bereit?“ aktiv, ohne Mindestwartezeit.
+
+Für dieses Update müssen auch alle Bilder unter assets/cards ersetzt werden. index.html, app.js, game-core.js und style.css ebenfalls ersetzen. Dateien auf GitHub unter denselben Namen und Pfaden überschreiben. Danach committen und nach dem Pages-Deployment mit Strg+Umschalt+R neu laden. V3 startet einmalig eine neue Partie.

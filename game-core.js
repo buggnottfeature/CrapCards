@@ -7,8 +7,9 @@ class Game {
  next(now=Date.now()){if(!['idle','between'].includes(this.s.phase))return false;if(this.s.round)this.s.active=(this.s.active+1)%4;Object.assign(this.s,{round:this.s.round+1,phase:'prep',cards:this.data.map((_,i)=>this.draw(i)),selected:Array(5).fill(false),swapped:false,swapChoice:null,deadline:now+20000});return true;}
  swap(i){if(this.s.phase!=='prep'||this.s.swapped||this.s.swapChoice!=='yes'||i<0||i>4)return false;this.s.cards[i]=this.draw(i);this.s.swapped=true;this.s.swapChoice='done';return true;}
  start(now=Date.now()){if(this.s.phase!=='prep')return false;this.s.phase='speech';this.s.deadline=now+60000;return true;}
- tick(now=Date.now()){if(this.s.phase==='prep'&&now>=this.s.deadline){const began=this.s.deadline;this.start(began);}if(this.s.phase==='speech'&&now>=this.s.deadline){this.s.phase='score';this.s.deadline=0;}return this.s.phase;}
- stop(now=Date.now()){if(this.s.phase==='speech'&&this.s.deadline-now<=30000){this.s.phase='score';this.s.deadline=0;return true;}return false;}
+ tick(now=Date.now()){if(this.s.phase==='speech'&&now>=this.s.deadline){this.s.phase='review';this.s.deadline=0;}return this.s.phase;}
+ stop(now=Date.now()){if(this.s.phase==='speech'){this.s.phase='review';this.s.deadline=0;return true;}return false;}
+ evaluate(){if(this.s.phase!=='review')return false;this.s.phase='score';return true;}
  toggle(i){if(this.s.phase!=='score')return;this.s.selected[i]=!this.s.selected[i];}
  points(){return this.s.selected.filter(Boolean).length+(this.s.swapped?0:2);}
  commit(){if(this.s.phase!=='score')return false;this.s.players[this.s.active].score+=this.points();this.s.phase=this.s.players[this.s.active].score>=60?'ended':'between';return true;}
